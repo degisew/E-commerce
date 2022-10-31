@@ -9,7 +9,7 @@ import {
 import { ShoppingCart } from "@mui/icons-material";
 import styles from "./styles";
 import logo from "../../assets/images/logo.png";
-const NavBar = () => {
+const NavBar = ({ totalItems }) => {
   return (
     <>
       <AppBar position="fixed" color="inherit" sx={styles.appBar}>
@@ -20,7 +20,7 @@ const NavBar = () => {
           </Typography>
           <div>
             <IconButton aria-label="show-cart-items">
-              <Badge badgeContent={3} color="error">
+              <Badge badgeContent={totalItems} color="error">
                 <ShoppingCart />
               </Badge>
             </IconButton>
