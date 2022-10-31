@@ -2,10 +2,12 @@ const styles = {
   appBar: {
     boxShadow: "none",
   },
-  title: {
-    flexGrow: 1,
-    alignItems: "center",
+  logoTitle: {
     display: "flex",
+    alignItems: "center",
+    columnGap: "10px",
+    fontFamily: "Lobster, sans serif ",
+    fontStyle: 'italic',
     textDecoration: "none",
   },
   image: {
@@ -15,9 +17,9 @@ const styles = {
     flexGrow: 1,
   },
   toolBar: {
-    display: 'flex',
-    justifyContent: 'space-between'
-  }
+    display: "flex",
+    justifyContent: "space-between",
+  },
   //   search: {
   //     position: "relative",
   //     borderRadius: theme.shape.borderRadius,
