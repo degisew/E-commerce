@@ -10,16 +10,27 @@ import {
 import { AddShoppingCart } from "@mui/icons-material";
 import styles from "./styles";
 const Product = ({ product }) => {
+  console.log(product);
   return (
     <>
       <Card sx={styles.root}>
-        <CardMedia image={product.image} title="Card-Image" sx={styles.media} />
+        <CardMedia
+          image={product.image.url}
+          title="Card-Image"
+          sx={styles.media}
+        />
         <CardContent>
           <CardContent sx={styles.cardContent}>
             <Typography variant="h5">{product.name}</Typography>
-            <Typography variant="h5">{product.price}</Typography>
+            <Typography variant="h5">
+              {product.price.formatted_with_symbol}
+            </Typography>
           </CardContent>
-          <Typography variant="body2">{product.description}</Typography>
+          <Typography
+            dangerouslySetInnerHTML={{ __html: product.description }}
+            variant="body2"
+           color='rgb(99, 91, 91)'
+          />
         </CardContent>
         <CardActions sx={styles.cardActions}>
           <IconButton aria-label="Add-to-cart">
