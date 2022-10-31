@@ -9,8 +9,8 @@ import {
 } from "@mui/material";
 import { AddShoppingCart } from "@mui/icons-material";
 import styles from "./styles";
-const Product = ({ product }) => {
-  console.log(product);
+const Product = ({ product, onAddToCart }) => {
+//  console.log(product);
   return (
     <>
       <Card sx={styles.root}>
@@ -33,7 +33,8 @@ const Product = ({ product }) => {
           />
         </CardContent>
         <CardActions sx={styles.cardActions}>
-          <IconButton aria-label="Add-to-cart">
+          <IconButton aria-label="Add-to-cart" onClick={() => {
+            onAddToCart(product.id, 1)}}>
             <AddShoppingCart />
           </IconButton>
         </CardActions>
