@@ -39,14 +39,17 @@ const App = () => {
 
   return (
     <>
-        <NavBar totalItems={cart.total_items} />
+      <NavBar totalItems={cart.total_items} />
       <Routes>
-        <Route path="/" component={<Cart cart={cart} products={products} />} />
         <Route
-          path="/cart"
-          component={
+          path="/"
+          element={
             <Products products={products} onAddToCart={addToCartHandler} />
           }
+        />
+        <Route
+          path="/cart"
+          element={<Cart cart={cart} products={products} />}
         />
       </Routes>
     </>
