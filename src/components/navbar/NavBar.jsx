@@ -12,7 +12,7 @@ import logo from "../../assets/images/logo.png";
 const NavBar = ({ totalItems }) => {
   return (
     <>
-      <AppBar position="fixed" color="inherit" sx={styles.appBar}>
+      <AppBar position="fixed" sx={styles.appBar}>
         <Toolbar sx={styles.toolBar}>
           <Typography variant="h6" sx={styles.logoTitle}>
             <img src={logo} alt="Logo" width="35px" sx={styles.image} />
