@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 import {
   AppBar,
   Toolbar,
@@ -21,7 +22,9 @@ const NavBar = ({ totalItems }) => {
           <div>
             <IconButton aria-label="show-cart-items">
               <Badge badgeContent={totalItems} color="error">
-                <ShoppingCart />
+                <Link to='/cart'>
+                  <ShoppingCart />
+                </Link>
               </Badge>
             </IconButton>
           </div>
