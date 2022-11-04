@@ -28,6 +28,26 @@ const App = () => {
     const item = await commerce.cart.add(productId, quantity);
     setCart(item);
   };
+
+  //Update (Increment or decrement) cart items 
+  const updateCartItemQuantity = async (productId, quantity) => {
+    const response = await commerce.cart.update(productId, { quantity: quantity });
+    console.log(productId, quantity);
+    setCart(response);
+  }
+
+  //Delete an item from the cart
+  const removeCartProduct = async (productId) => {
+    const response = await commerce.cart.remove(productId);
+    setCart(response);
+  };
+
+  //  make cart empty totally
+  const emptyCart = async () => {
+    const response = await commerce.cart.empty();
+    setCart(response);
+  }
+
   // state lifecycle method with hooks
   useEffect(() => {
     // deleteCart();
@@ -35,7 +55,7 @@ const App = () => {
     fetchCart();
   }, []);
 
-  //console.log(cart);
+  console.log(cart);
 
   return (
     <>
@@ -44,12 +64,24 @@ const App = () => {
         <Route
           path="/"
           element={
-            <Products products={products} onAddToCart={addToCartHandler} />
+            <Products
+              products={products}
+              cart={cart}
+              onAddToCart={addToCartHandler}
+            />
           }
         />
         <Route
           path="/cart"
-          element={<Cart cart={cart} products={products} />}
+          element={
+            <Cart
+              cart={cart}
+              products={products}
+              updateQty={updateCartItemQuantity}
+              removeProduct={removeCartProduct}
+              emptyCart={emptyCart}
+            />
+          }
         />
       </Routes>
     </>
