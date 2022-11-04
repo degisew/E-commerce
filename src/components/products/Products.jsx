@@ -1,8 +1,14 @@
 import React from "react";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import Product from "./Product/Product";
 import styles from "./styles";
-const Products = ({ products, onAddToCart}) => {
+const Products = ({ products, onAddToCart }) => {
+  if (!products)
+    return (
+      <Typography variant="h5" sx={styles.loading}>
+        Loading...
+      </Typography>
+    );
   return (
     <main>
       <Grid
@@ -15,7 +21,7 @@ const Products = ({ products, onAddToCart}) => {
       >
         {products.map((product) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
-            <Product product={product} onAddToCart={onAddToCart}/>
+            <Product product={product} onAddToCart={onAddToCart} />
           </Grid>
         ))}
       </Grid>
