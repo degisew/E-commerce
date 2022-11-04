@@ -6,11 +6,12 @@ import {
   CardMedia,
   IconButton,
   Typography,
+  Tooltip,
 } from "@mui/material";
 import { AddShoppingCart } from "@mui/icons-material";
 import styles from "./styles";
+
 const Product = ({ product, onAddToCart }) => {
-//  console.log(product);
   return (
     <>
       <Card sx={styles.root}>
@@ -29,14 +30,20 @@ const Product = ({ product, onAddToCart }) => {
           <Typography
             dangerouslySetInnerHTML={{ __html: product.description }}
             variant="body2"
-           color='rgb(99, 91, 91)'
+            color="rgb(99, 91, 91)"
           />
         </CardContent>
         <CardActions sx={styles.cardActions}>
-          <IconButton aria-label="Add-to-cart" onClick={() => {
-            onAddToCart(product.id, 1)}}>
-            <AddShoppingCart />
-          </IconButton>
+          <Tooltip title="Add to Cart">
+            <IconButton
+              aria-label="Add-to-cart"
+              onClick={() => {
+                onAddToCart(product.id, 1);
+              }}
+            >
+              <AddShoppingCart />
+            </IconButton>
+          </Tooltip>
         </CardActions>
       </Card>
     </>
