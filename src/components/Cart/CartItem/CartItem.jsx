@@ -7,24 +7,30 @@ import {
   CardMedia,
   Button,
 } from "@mui/material";
+
+import styles from './styles'
 const CartItem = ({ item }) => {
   return (
     <>
-      <Card>
-        <CardMedia image={item.image.url} alt={item.name} />
-        <CardContent>
-          <Typography variant="h4">"{item.name}"</Typography>
-          <Typography variant="h5">
+      <Card sx={styles.card}>
+        <CardMedia
+          image={item.image.url}
+          title={item.name}
+          sx={styles.media}
+        />
+        <CardContent sx={styles.cardContent}>
+          <Typography variant="h5">"{item.name}"</Typography>
+          <Typography variant="h6">
             "{item.line_total.formatted_with_symbol}"
           </Typography>
         </CardContent>
-        <CardActions>
-          <div>
-            <Button type="button" size="small">
+        <CardActions sx={styles.cardActions}>
+          <div className="btn-quantity">
+            <Button type="button" size="large">
               -
             </Button>
-            <Typography>{item.quantity}</Typography>
-            <Button type="buton" size="small">
+            <Typography variant='body2'>{item.quantity}</Typography>
+            <Button type="buton" size="large">
               +
             </Button>
           </div>
