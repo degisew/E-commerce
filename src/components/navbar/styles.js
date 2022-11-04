@@ -9,6 +9,7 @@ const styles = {
     columnGap: "10px",
     fontFamily: "Lobster, sans serif ",
     fontStyle: "italic",
+    color: "white",
     textDecoration: "none",
   },
   image: {
