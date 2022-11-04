@@ -1,20 +1,29 @@
 body {
-  background-color: aliceblue;
-  color: rgb(99, 91, 91);
+    background-color: aliceblue;
+    color: rgb(99, 91, 91);
 }
 
 .spacerDiv {
-  height: 80px;
+    height: 80px;
 }
 
 .btn-quantity {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 
 .btn-cart {
     display: flex;
     column-gap: 10px;
-    
+}
+
+.add-items {
+    text-decoration-line: none;
+}
+
+.subtotal-btns-div {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 3rem;
 }
