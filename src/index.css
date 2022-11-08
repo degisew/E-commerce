@@ -27,3 +27,11 @@ body {
     justify-content: space-around;
     margin-top: 3rem;
 }
+
+.form-Container {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
