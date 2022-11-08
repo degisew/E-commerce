@@ -1,12 +1,12 @@
 import React from "react";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, CircularProgress } from "@mui/material";
 import Product from "./Product/Product";
 import styles from "./styles";
 const Products = ({ products, onAddToCart }) => {
-  if (!products)
+  if (products.length === 0)
     return (
       <Typography variant="h5" sx={styles.loading}>
-        Loading...
+        <CircularProgress variant="indeterminate"/>
       </Typography>
     );
   return (
