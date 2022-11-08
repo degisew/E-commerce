@@ -6,22 +6,29 @@ import {
   Typography,
   Button,
   Tooltip,
+  CircularProgress,
 } from "@mui/material";
 import { RemoveShoppingCart, PriceCheck } from "@mui/icons-material";
 import CartItem from "./CartItem/CartItem";
 
+import styles from './styles'
+
 const Cart = ({ cart, updateQty, removeProduct, emptyCart }) => {
-  // console.log(cart.line_items.length)
 
   const EmptyCart = () => (
-    <Typography variant="subtitle1">
+    <Typography variant="subtitle1" align="center">
       You have no items yet,
       <Tooltip title="click to add items">
-
-      <Link to="/" className='add-items'>start adding them!</Link>
+      <Link to="/" className='add-items'>start adding some!</Link>
       </Tooltip>
     </Typography>
   );
+    if (!cart.line_items)
+      return (
+        <Typography variant="h5" sx={styles.loading}>
+          <CircularProgress variant="indeterminate" />
+        </Typography>
+      );
   const FilledCart = () => (
     <>
       <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
@@ -53,7 +60,7 @@ const Cart = ({ cart, updateQty, removeProduct, emptyCart }) => {
         >
           EMPTY CART
         </Button>
-        <Button color="primary" variant="contained" size="small" startIcon={<PriceCheck/>}>
+        <Button component={ Link } to="/checkout" color="primary" variant="contained" size="small" startIcon={<PriceCheck/>}>
           CHECKOUT
         </Button>
       </div>
@@ -61,13 +68,13 @@ const Cart = ({ cart, updateQty, removeProduct, emptyCart }) => {
     </>
   );
 
-  if (!cart.line_items) return <Typography variant="h3">Loading...</Typography>;
+
 
   return (
     <>
       <Container>
         <div className="spacerDiv"></div>
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h4" align="center" gutterBottom>
           Your Shopping Cart
         </Typography>
         {!cart.line_items.length ? <EmptyCart /> : <FilledCart />}
