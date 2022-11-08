@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "./components/Navbar/NavBar";
 import Products from "./components/Products/Products";
+import Checkout from './components/CheckoutForm/Checkout/Checkout'
 import commerce from "./lib/commerce";
 import Cart from "./components/Cart/Cart";
 import { Routes, Route } from "react-router-dom";
@@ -11,8 +12,15 @@ const App = () => {
 
   //fetch a list of products
   const fetchProducts = async () => {
-    const { data } = await commerce.products.list();
-    setProducts(data);
+  try {
+      const { data } = await commerce.products.list();
+      setProducts(data);
+
+    }catch(error) {
+     if (error.name == "NetworkError") {
+       console.log("There was a network error.");
+     }
+    }
   };
 
   // const deleteCart = async () => {
@@ -21,31 +29,48 @@ const App = () => {
 
   //create and retrieve a cart
   const fetchCart = async () => {
-    setCart(await commerce.cart.retrieve());
+    try {
+      const response = await commerce.cart.retrieve();
+        setCart(response);
+    }catch(error) {
+    }
   };
   // Add item to cart
   const addToCartHandler = async (productId, quantity) => {
-    const item = await commerce.cart.add(productId, quantity);
-    setCart(item);
+    try {
+
+      const item = await commerce.cart.add(productId, quantity);
+      setCart(item);
+    }catch(error) {
+    }
   };
 
   //Update (Increment or decrement) cart items 
   const updateCartItemQuantity = async (productId, quantity) => {
+    try {
     const response = await commerce.cart.update(productId, { quantity: quantity });
-    console.log(productId, quantity);
     setCart(response);
+  }catch(error) {
+    }
   }
 
   //Delete an item from the cart
   const removeCartProduct = async (productId) => {
-    const response = await commerce.cart.remove(productId);
-    setCart(response);
+    try {
+      const response = await commerce.cart.remove(productId);
+      setCart(response);
+    } catch (error) {
+    }
   };
 
   //  make cart empty totally
   const emptyCart = async () => {
-    const response = await commerce.cart.empty();
-    setCart(response);
+    try {
+      const response = await commerce.cart.empty();
+      setCart(response);
+    } catch (error) {
+    }
+    
   }
 
   // state lifecycle method with hooks
@@ -55,7 +80,7 @@ const App = () => {
     fetchCart();
   }, []);
 
-  console.log(cart);
+  // console.log(cart);
 
   return (
     <>
@@ -83,6 +108,9 @@ const App = () => {
             />
           }
         />
+        <Route element={<Checkout /> } path="/checkout"/>
+
+        
       </Routes>
     </>
   );
