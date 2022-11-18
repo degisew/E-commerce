@@ -80,8 +80,6 @@ const App = () => {
     fetchCart();
   }, []);
 
-  // console.log(cart);
-
   return (
     <>
       <NavBar totalItems={cart.total_items} />
