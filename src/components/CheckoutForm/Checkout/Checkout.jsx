@@ -9,7 +9,6 @@ const steps = ["shipping address", "payment details"];
 
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
-  console.log(setActiveStep(1));
   const Form = () => (activeStep === 0 ? <AddressForm /> : <PaymentForm />);
 
   const Confirmation = () => <div>Confirmation</div>;
