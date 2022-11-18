@@ -17,7 +17,7 @@ const App = () => {
       setProducts(data);
 
     }catch(error) {
-     if (error.name == "NetworkError") {
+     if (error.name === "NetworkError") {
        console.log("There was a network error.");
      }
     }
