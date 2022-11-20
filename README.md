@@ -1,6 +1,6 @@
 
 # E-Commerce
-A full stack E-Commerce app for your shopping business. It allows a user to buy products, add to cart, remove from cart and also can choose shipping process and make payments.
+A full stack E-Commerce app for your shopping business. It allows a user to buy products, add to cart, remove from cart and also can ship anywhere and make payments.
 
 ## Built With the following
 
@@ -40,9 +40,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-## Live Demo
-
-[Live Demo](https://degisew-e-commerce.netlify.app)
 ## Author
 
 👤 **Degisew**
