@@ -1,18 +1,21 @@
-import React from 'react'
-import { Grid, InputLabel, MenuItem, Select } from '@mui/material'
-const DropDownField = ({ label }) => {
-  return (
-    <Grid item xs={12} sm={6}>
-      <InputLabel>
-      {label}
-      </InputLabel>
-      <Select fullWidth >
-        <MenuItem value="">{"from API 1"}</MenuItem>
-        <MenuItem value="">{"from API 2"}</MenuItem>
-        <MenuItem value="">{"from API 3"}</MenuItem>
-      </Select>
-    </Grid>
-  )
-}
+// import React from 'react'
+// import { Grid, InputLabel, MenuItem, Select } from '@mui/material'
+// const DropDownField = () => {
+// //  console.log(countries);
+//   return (
+//     <Grid item xs={12} sm={6}>
+//       <InputLabel>{/* {label} */}</InputLabel>
+//       <Select fullWidth value={shippingCounty} onChange={}>
+//         {countries.map((country) => (
+//           <MenuItem key={country.id} value={country.id}>
+//             {country.label}
+//           </MenuItem>
+//         ))}
 
-export default DropDownField
+        
+//       </Select>
+//     </Grid>
+//   );
+// }
+
+// export default DropDownField
