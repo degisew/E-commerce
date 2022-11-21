@@ -35,3 +35,8 @@ body {
     align-items: center;
     padding: 30px;
 }
+
+.checkout-stepper-btn-div {
+    display: flex;
+    justify-content: space-between;
+}
