@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Typography, InputLabel, MenuItem, Select } from "@mui/material";
+import { Grid, Typography, Button, InputLabel, MenuItem, Select } from "@mui/material";
 import { useForm, FormProvider } from "react-hook-form";
 import FormInputField from "./FormInputField";
-//import DropDownField from "./Checkout/DropDownField";
+import { Link } from 'react-router-dom';
 import commerce from "../../lib/commerce";
 
 const AddressForm = ({ generatedToken }) => {
@@ -19,7 +19,6 @@ const AddressForm = ({ generatedToken }) => {
       const { countries } = await commerce.services.localeListShippingCountries(
         tokenId
       );
-      // console.log(countries);
       setShippingCountries(countries);
       setShippingCountry(Object.keys(countries)[0]);
     };
@@ -70,8 +69,8 @@ const options = shippingOptions.map((opt) => ({ id: opt.id, label: `${opt.descri
           onSubmit={methods.handleSubmit((data) => console.log(data))}
         >
           <Grid container rowSpacing={3} columnSpacing={3} mt="5px">
-            <FormInputField name="firstame" />
-            <FormInputField name="middleName" />
+            <FormInputField name="firstName" />
+            {/* <FormInputField name="middleName" /> */}
             <FormInputField name="lastName" />
             <FormInputField name="address" />
             <FormInputField name="email" />
@@ -127,6 +126,15 @@ const options = shippingOptions.map((opt) => ({ id: opt.id, label: `${opt.descri
               </Select>
             </Grid>
           </Grid>
+          <br />
+          <div className="checkout-stepper-btn-div">
+            <Button size="small" variant="contained" component={Link} to="/cart">
+              Back to Cart
+            </Button>
+            <Button color="primary" type="submit" size="small" variant="contained">
+              Next
+            </Button>
+          </div>
         </form>
       </FormProvider>
     </main>
