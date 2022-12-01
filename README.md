@@ -22,7 +22,7 @@ To get a local copy up and running follow these simple example steps.
 2. Clone this repo in your terminal or git bash using the command
 
    ```
-     git clone <URL> 'https://github.com/degisew/e-commerce' in your terminal
+     git clone <URL> 'https://github.com/degisew/E-commerce' in your terminal
       
    ```
 
