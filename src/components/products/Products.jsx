@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Typography, CircularProgress } from "@mui/material";
-import Product from "./Product/Product";
+import Product from "./product/Product";
 import styles from "./styles";
 const Products = ({ products, onAddToCart }) => {
   if (products.length === 0)
