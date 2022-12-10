@@ -15,22 +15,34 @@ import styles from "./styles";
 const steps = ["shipping address", "payment details"];
 const Checkout = ({ cart }) => {
   const [generatedToken, setGeneratedToken] = useState(null);
+  console.log(generatedToken);
   useEffect(() => {
-    const token = commerce.checkout.generateToken(cart.id, {type: 'cart'});
-    setGeneratedToken(token);
+    try {
+      const token = commerce.checkout.generateToken(cart.id, {type: 'cart'});
+      setGeneratedToken(token);
+    }catch(error) {
+      console.log('There was an error in generating a token', error);
+    }
   }, [cart]);
     const [activeStep,setActiveStep] = useState(0);
+    const [shippingData, setshippingData] = useState({});
 
     const Form = () =>
       activeStep === 0 ? (
-        <AddressForm generatedToken={generatedToken} />
+        <AddressForm generatedToken={generatedToken} next={next} />
       ) : (
-        <PaymentForm />
+        <PaymentForm generatedToken={generatedToken} setActiveStep ={setActiveStep}/>
       );
 
     const Confirmation = () =>  (
       <div>Confirmation</div>
     )
+
+    const next = (shippingFormData) => {
+      setshippingData(shippingFormData);
+      setActiveStep((prevState) => prevState + 1);    
+    }
+
   return (
     <>
       <div className="spacerDiv" />

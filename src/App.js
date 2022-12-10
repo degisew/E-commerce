@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "./components/Navbar/NavBar";
-import Products from "./components/Products/Products";
+import Products from "./components/products/Products";
 import Checkout from './components/CheckoutForm/Checkout/Checkout'
 import commerce from "./lib/commerce";
 import Cart from "./components/Cart/Cart";

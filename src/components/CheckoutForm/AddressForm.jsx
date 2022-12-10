@@ -5,7 +5,7 @@ import FormInputField from "./FormInputField";
 import { Link } from 'react-router-dom';
 import commerce from "../../lib/commerce";
 
-const AddressForm = ({ generatedToken }) => {
+const AddressForm = ({ generatedToken, next }) => {
   const [shippingCountries, setShippingCountries] = useState([]);
   const [shippingCounty, setShippingCountry] = useState("");
   const [shippingSubDivisions, setShippingSubDivisions] = useState([]);
@@ -38,10 +38,13 @@ const AddressForm = ({ generatedToken }) => {
 
 useEffect(() => {
   const fetchShippingOptions = async (tokenId, country, region = null) => {
-    const shippingOptions = await commerce.checkout.getShippingOptions(tokenId, { country, region });
+    const shippingOptions = await commerce.checkout.getShippingOptions(
+      tokenId,
+      { country, region }
+    );
     setShippingOptions(shippingOptions);
     setShippingOption(shippingOptions[0].id);
-  }
+  };
   fetchShippingOptions(generatedToken.id, shippingCounty, shippingSubDivision);
 }, [shippingSubDivision]);
 
@@ -66,7 +69,7 @@ const options = shippingOptions.map((opt) => ({ id: opt.id, label: `${opt.descri
       <FormProvider {...methods}>
         <form
           action="#"
-          onSubmit={methods.handleSubmit((data) => console.log(data))}
+          onSubmit={methods.handleSubmit((data) => next({...data, shippingCounty, shippingSubDivision, shippingOption}))}
         >
           <Grid container rowSpacing={3} columnSpacing={3} mt="5px">
             <FormInputField name="firstName" />
