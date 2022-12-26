@@ -12,21 +12,9 @@ const App = () => {
 
   //fetch a list of products
   const fetchProducts = async () => {
-  try {
       const { data } = await commerce.products.list();
-      setProducts(data);
-
-    }catch(error) {
-     if (error.name === "NetworkError") {
-       console.log("There was a network error.");
-     }
-    }
+      setProducts(data);   
   };
-
-  // const deleteCart = async () => {
-  //   commerce.cart.delete();
-  // }
-
   //create and retrieve a cart
   const fetchCart = async () => {
     try {
@@ -37,45 +25,34 @@ const App = () => {
   };
   // Add item to cart
   const addToCartHandler = async (productId, quantity) => {
-    try {
-
       const item = await commerce.cart.add(productId, quantity);
       setCart(item);
-    }catch(error) {
-    }
   };
 
   //Update (Increment or decrement) cart items 
   const updateCartItemQuantity = async (productId, quantity) => {
-    try {
     const response = await commerce.cart.update(productId, { quantity: quantity });
     setCart(response);
-  }catch(error) {
-    }
   }
-
   //Delete an item from the cart
   const removeCartProduct = async (productId) => {
-    try {
       const response = await commerce.cart.remove(productId);
       setCart(response);
-    } catch (error) {
-    }
   };
 
   //  make cart empty totally
   const emptyCart = async () => {
-    try {
       const response = await commerce.cart.empty();
       setCart(response);
-    } catch (error) {
-    }
-    
   }
+
+const refreshCart = async () => {
+  const newCart = await commerce.cart.refresh();
+  setCart(newCart);
+}
 
   // state lifecycle method with hooks
   useEffect(() => {
-    // deleteCart();
     fetchProducts();
     fetchCart();
   }, []);
@@ -107,9 +84,10 @@ const App = () => {
             />
           }
         />
-        <Route element={<Checkout cart={cart} /> } path="/checkout"/>
-
-        
+        <Route element={
+        <Checkout cart={cart} 
+        refreshCart={refreshCart} 
+        /> } path="/checkout"/>
       </Routes>
     </>
   );

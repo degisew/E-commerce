@@ -1,6 +1,4 @@
 
-
-
 const styles = {
   loading: {
     display: "flex",
