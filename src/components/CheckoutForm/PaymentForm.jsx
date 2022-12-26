@@ -3,24 +3,46 @@ import { Typography, Button, Divider } from '@mui/material';
 import { Elements, CardElement, ElementsConsumer } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import Review from './Review';
+import styles from './styles'
 
-const stripePromise = loadStripe();
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
-const PaymentForm = ({ generatedToken, setActiveStep }) => {
+const PaymentForm = ({
+  generatedToken,
+  refreshCart,
+  nextStep,
+  prevStep,
+  timeout,
+}) => {
+  const handleSubmit = async (event, elements, stripe) => {
+    event.preventDefault();
+    if (!stripe || !elements) return;
+    const cardElement = elements.getElement(CardElement);
+    const { error } = await stripe.createPaymentMethod({
+      type: "card",
+      card: cardElement,
+    });
+    if (error) {
+    } else {
+      refreshCart();
+      timeout();
+      nextStep();
+    }
+  };
   return (
     <>
       <Review generatedToken={generatedToken} />
       <Divider />
-      <Typography variant="h6" gutterBottom>
+      <Typography variant="h6" sx={styles.paymentMethod} gutterBottom>
         Payment Method
       </Typography>
       <Elements stripe={stripePromise}>
         <ElementsConsumer>
           {({ elements, stripe }) => (
-            <form>
+            <form onSubmit={(e) => handleSubmit(e, elements, stripe)}>
               <CardElement /> <br /> <br />
-              <div>
-                <Button variant="outlined" onClick={setActiveStep((prevStep) => prevStep - 1 )}>
+              <div className="pay-btn">
+                <Button variant="outlined" onClick={prevStep}>
                   Back
                 </Button>
                 <Button
@@ -29,7 +51,7 @@ const PaymentForm = ({ generatedToken, setActiveStep }) => {
                   disabled={!stripe}
                   color="primary"
                 >
-                  Pay {generatedToken.live.subtotal.formated_with_symbol}
+                  Pay {generatedToken.subtotal.formatted_with_symbol}
                 </Button>
               </div>
             </form>

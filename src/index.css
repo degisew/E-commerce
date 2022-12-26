@@ -40,3 +40,16 @@ body {
     display: flex;
     justify-content: space-between;
 }
+
+.pay-btn {
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.confirmation {
+    display: flex;
+    padding: 15px;
+    flex-direction: column;
+    align-items: center;
+}

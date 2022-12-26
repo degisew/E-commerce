@@ -7,7 +7,7 @@ import commerce from "../../lib/commerce";
 
 const AddressForm = ({ generatedToken, next }) => {
   const [shippingCountries, setShippingCountries] = useState([]);
-  const [shippingCounty, setShippingCountry] = useState("");
+  const [shippingCountry, setShippingCountry] = useState("");
   const [shippingSubDivisions, setShippingSubDivisions] = useState([]);
   const [shippingSubDivision, setShippingSubDivision] = useState("");
   const [shippingOptions, setShippingOptions] = useState([]);
@@ -24,7 +24,6 @@ const AddressForm = ({ generatedToken, next }) => {
     };
     fetchShippingCountries(generatedToken.id);
   }, []);
-
   useEffect(() => {
     const fetchShippingSubdivisions = async (country) => {
       const { subdivisions } = await commerce.services.localeListSubdivisions(
@@ -33,8 +32,8 @@ const AddressForm = ({ generatedToken, next }) => {
       setShippingSubDivisions(subdivisions);
       setShippingSubDivision(Object.keys(subdivisions)[0]);
     };
-    if (shippingCounty) fetchShippingSubdivisions(shippingCounty);
-  }, [shippingCounty]);
+    if (shippingCountry) fetchShippingSubdivisions(shippingCountry);
+  }, [shippingCountry]);
 
 useEffect(() => {
   const fetchShippingOptions = async (tokenId, country, region = null) => {
@@ -45,7 +44,7 @@ useEffect(() => {
     setShippingOptions(shippingOptions);
     setShippingOption(shippingOptions[0].id);
   };
-  fetchShippingOptions(generatedToken.id, shippingCounty, shippingSubDivision);
+  fetchShippingOptions(generatedToken.id, shippingCountry, shippingSubDivision);
 }, [shippingSubDivision]);
 
   // a list of converted countries.
@@ -68,17 +67,15 @@ const options = shippingOptions.map((opt) => ({ id: opt.id, label: `${opt.descri
       </Typography>
       <FormProvider {...methods}>
         <form
-          action="#"
-          onSubmit={methods.handleSubmit((data) => next({...data, shippingCounty, shippingSubDivision, shippingOption}))}
+          onSubmit={methods.handleSubmit((data) => next({...data, shippingCountry, shippingSubDivision, shippingOption}))}
         >
           <Grid container rowSpacing={3} columnSpacing={3} mt="5px">
             <FormInputField name="firstName" />
-            {/* <FormInputField name="middleName" /> */}
             <FormInputField name="lastName" />
             <FormInputField name="address" />
             <FormInputField name="email" />
             <FormInputField name="city" />
-            <FormInputField name="Zip Code" />
+            <FormInputField name="zipCode" />
           </Grid>
           <Grid container rowSpacing={3} columnSpacing={3} mt="5px">
             <Grid item xs={12} sm={6}>
@@ -86,7 +83,7 @@ const options = shippingOptions.map((opt) => ({ id: opt.id, label: `${opt.descri
               <Select
                 size="small"
                 fullWidth
-                value={shippingCounty}
+                value={shippingCountry}
                 onChange={(e) => setShippingCountry(e.target.value)}
               >
                 {listOfCountries.map((country) => (
@@ -96,7 +93,6 @@ const options = shippingOptions.map((opt) => ({ id: opt.id, label: `${opt.descri
                 ))}
               </Select>
             </Grid>
-            {/* //##################################################### */}
             <Grid item xs={12} sm={6}>
               <InputLabel>Shipping Subdivision</InputLabel>
               <Select
@@ -112,7 +108,6 @@ const options = shippingOptions.map((opt) => ({ id: opt.id, label: `${opt.descri
                 ))}
               </Select>
             </Grid>
-            {/* // ##################################################### */}
             <Grid item xs={12} sm={6}>
               <InputLabel>Shipping Options</InputLabel>
               <Select
@@ -141,7 +136,8 @@ const options = shippingOptions.map((opt) => ({ id: opt.id, label: `${opt.descri
         </form>
       </FormProvider>
     </main>
-  );
+  )
+               
 };
 
 export default AddressForm;
